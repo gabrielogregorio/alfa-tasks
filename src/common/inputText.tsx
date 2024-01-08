@@ -57,11 +57,12 @@ export const InputText = ({
 
   return (
     <div className="w-full">
-      <div ref={refElement}>
-        <div id={name}>
+      <div ref={refElement} className="w-full">
+        <div id={name} className="w-full">
           <div className="min-h-[1rem] w-full transition-all duration-150">
             {!isEditable ? (
               <Button
+                className="w-full !text-left"
                 isDisabled={isDisabled}
                 isRisked={isRisked}
                 content={value}
@@ -77,7 +78,7 @@ export const InputText = ({
                 cols={sizeInCols}
                 rows={sizeInRows}
                 name={name}
-                className={`bg-transparent p-2 pb-4 w-full outline-none text-left focus:outline-none resize-none border-gray-700 shadow-2xl flex flex-col justify-center items-start hover:text-white group-hover:text-white transition-all tracking-[0%] duration-150 leading-[19.2px] font-roboto-Condensed ${
+                className={`bg-transparent  p-2 pb-4 w-full outline-none text-left focus:outline-none resize-none border-gray-700 shadow-2xl flex flex-col justify-center items-start hover:text-white group-hover:text-white transition-all tracking-[0%] duration-150 leading-[19.2px] font-roboto-Condensed ${
                   isRisked ? 'line-through' : ''
                 }`}
                 id={name}

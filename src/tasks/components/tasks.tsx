@@ -13,9 +13,9 @@ export const Tasks = (): ReactElement => {
       <table className="table-auto text-white">
         <thead className="font-roboto">
           <tr>
-            <th className="text-white/60 text-left py-[4px] px-[5px]">TASK</th>
-            <th className="text-white/60 text-left py-[4px] px-[5px] pl-[62px]">CONCLUDA</th>
-            <th className="text-white/60 text-left py-[4px] px-[5px] pl-[62px]">AÇÕES</th>
+            <th className="text-white/60 text-left py-[4px] px-[5px]" aria-label="actions" />
+            <th className="text-white/60 text-left py-[4px] px-[5px]" aria-label="tasks" />
+            <th className="text-white/60 text-left py-[4px] px-[5px] pl-[1rem]" aria-label="concluido" />
           </tr>
         </thead>
 

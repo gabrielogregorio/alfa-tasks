@@ -8,6 +8,7 @@ export interface IButtonProps {
   onHover?: () => void;
   isRisked?: boolean;
   ariaLabel?: string;
+  className?: string;
   isDisabled?: boolean;
 }
 
@@ -16,6 +17,7 @@ export const Button = ({
   iconRight = undefined,
   content,
   onClick,
+  className = undefined,
   onHover = () => {},
   isRisked = false,
   ariaLabel = undefined,
@@ -36,10 +38,10 @@ export const Button = ({
       onMouseEnter={onHover}
       disabled={isDisabled}
       type="button"
-      className={`font-roboto-Condensed text-[1rem] tracking-[9%] mb-[0px] px-[0.875rem] py-[0.438rem] border border-transparent hover:border-white/60 hover:bg-black/30 flex items-center justify-center ${styleIsRisked}`}>
+      className={` font-roboto-Condensed text-[1rem] tracking-[9%] mb-[0px] px-[0.875rem] py-[0.438rem] border border-transparent hover:border-white/60 hover:bg-black/30  flex items-center justify-center ${styleIsRisked} ${className}`}>
       {iconLeft ? <span className="mr-[0.375rem]">{iconLeft}</span> : undefined}
 
-      <span>{content}</span>
+      <span className="flex-1">{content}</span>
 
       {iconRight ? <span className="ml-[0.375rem]">{iconRight}</span> : undefined}
     </button>
