@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  overflow-y: scroll;
+  color: #fbfbfe;
+  background-color: #2d3036;
+}
+
+input[type='checkbox'] {
+  zoom: 1.6;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 15px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border: none;
+  background: #2d3036;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border: none;
+  background: #1f2126;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  border: none;
+  background: #1f2126;
+}
+
+.scrollbar-inverse::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar-inverse::-webkit-scrollbar-track {
+  border: none;
+  background: #1f2126;
+}
+
+.scrollbar-inverse::-webkit-scrollbar-thumb {
+  border: none;
+  background: #2d3036;
+}
+
+.scrollbar-inverse::-webkit-scrollbar-thumb:hover {
+  border: none;
+  background: #2d3036;
+}
