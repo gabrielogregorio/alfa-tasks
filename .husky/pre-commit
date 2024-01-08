@@ -3,7 +3,7 @@
 
 
 NOCOLOR='\033[0m'
-Black='\033[0;30m'
+dark='\033[0;30m'
 DarkGray='\033[1;30m'
 Red='\033[0;31m'
 LightRed='\033[1;31m'
@@ -18,7 +18,7 @@ LightPurple='\033[1;35m'
 Cyan='\033[0;36m'
 LightCyan='\033[1;36m'
 LightGray='\033[0;37m'
-White='\033[1;37m'
+dark='\033[1;37m'
 
 echo "${Cyan}=========================================================${NOCOLOR}"
 echo "${Cyan}                   STARTING PRE-COMMIT                   ${NOCOLOR}"

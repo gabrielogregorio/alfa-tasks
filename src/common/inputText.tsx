@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 import { useRef, useEffect, useState } from 'react';
 import { Button } from './button';
 import { useOutsideClick } from './useOutsideClick';
+import { useHandleKeyboard } from './useHandleKeyboard';
 
 type inputMasks = 'default' | 'brl';
 interface IInputTextProps {
@@ -35,13 +36,21 @@ export const InputText = ({
   isDisabled = false,
 }: IInputTextProps): ReactElement => {
   const refElement = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [isEditable, setIsEditable] = useState<boolean>(false);
-  const { clickedOutside } = useOutsideClick(refElement);
+  useOutsideClick(
+    refElement,
+    () => {},
+    () => {
+      setIsEditable(false);
+    },
+  );
 
-  useEffect(() => {
-    setIsEditable(false);
-  }, [clickedOutside]);
+  useHandleKeyboard((key) => {
+    if (key === 'Escape') {
+      setIsEditable(false);
+    }
+  });
 
   useEffect(() => {
     if (isEditable) {
@@ -50,54 +59,44 @@ export const InputText = ({
     }
   }, [isEditable]);
 
-  const MIN_LINES_TEXT_AREA = 5;
-  const MAX_LINES_TEXT_AREA = 50;
-  const sizeInCols = value.length < MAX_LINES_TEXT_AREA ? value.length + MIN_LINES_TEXT_AREA : MAX_LINES_TEXT_AREA;
-  const sizeInRows = Math.ceil(value.length / MAX_LINES_TEXT_AREA) || 1;
+  const styleInputIsEditable = isEditable ? '' : 'hidden';
+  const styleInputIsRisked = isRisked ? 'line-through' : '';
 
   return (
-    <div className="w-full">
-      <div ref={refElement} className="w-full">
-        <div id={name} className="w-full">
-          <div className="min-h-[1rem] w-full transition-all duration-150">
-            {!isEditable ? (
-              <Button
-                className="w-full !text-left"
-                isDisabled={isDisabled}
-                isRisked={isRisked}
-                content={value}
-                onClick={(): void => {
-                  setIsEditable(true);
-                }}
-              />
-            ) : undefined}
+    <div className="min-h-[1rem] transition-all duration-150" ref={refElement}>
+      {!isEditable ? (
+        <Button
+          className="text-left w-full !block whitespace-nowrap text-ellipsis overflow-hidden"
+          isDisabled={isDisabled}
+          isRisked={isRisked}
+          content={value}
+          onClick={(): void => setIsEditable(true)}
+        />
+      ) : undefined}
 
-            {isEditable ? (
-              <textarea
-                ref={inputRef}
-                cols={sizeInCols}
-                rows={sizeInRows}
-                name={name}
-                className={`bg-transparent  p-2 pb-4 w-full outline-none text-left focus:outline-none resize-none border-gray-700 shadow-2xl flex flex-col justify-center items-start hover:text-white group-hover:text-white transition-all tracking-[0%] duration-150 leading-[19.2px] font-roboto-Condensed ${
-                  isRisked ? 'line-through' : ''
-                }`}
-                id={name}
-                onChange={(event): void => {
-                  const newText = event.target.value;
+      <input
+        type="text"
+        ref={inputRef}
+        name={name}
+        className={`bg-transparent ${styleInputIsEditable} outline-none text-left w-full px-[0.875rem] py-[0.438rem] focus:outline-none resize-none border-gray-700 flex flex-col justify-center items-start hover:text-textColor group-hover:text-textColor transition-all tracking-[0%] duration-150 leading-[19.2px] font-roboto-Condensed ${styleInputIsRisked}`}
+        id={name}
+        onKeyDown={(event) => {
+          if (event.code === 'Enter' || event.key === 'Enter') {
+            setIsEditable(false);
+          }
+        }}
+        onChange={(event): void => {
+          const newText = event.target.value;
 
-                  const masks: { [key in inputMasks]: (content: string) => string } = {
-                    default: (text: string) => text,
-                    brl: (text: string) => toBrazilian(text),
-                  };
+          const masks: { [key in inputMasks]: (content: string) => string } = {
+            default: (text: string) => text,
+            brl: (text: string) => toBrazilian(text),
+          };
 
-                  update(masks[mask](newText));
-                }}
-                value={value}
-              />
-            ) : undefined}
-          </div>
-        </div>
-      </div>
+          update(masks[mask](newText));
+        }}
+        value={value}
+      />
     </div>
   );
 };

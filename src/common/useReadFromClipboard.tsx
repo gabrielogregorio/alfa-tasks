@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useCallback } from 'react';
 
 export const useReadFromClipboard = (): {
@@ -9,6 +8,7 @@ export const useReadFromClipboard = (): {
       .readText()
       .then((text) => text)
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.error('Could not read clipboard: ', err);
         return '';
       });

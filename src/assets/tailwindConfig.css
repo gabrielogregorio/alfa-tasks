@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
   overflow-y: scroll;
   color: #fbfbfe;
-  background-color: #2d3036;
+  background-color: #32323e;
 }
 
 input[type='checkbox'] {
@@ -26,7 +26,7 @@ input[type='checkbox'] {
 
 .scrollbar::-webkit-scrollbar-track {
   border: none;
-  background: #2d3036;
+  background: #32323e;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
@@ -50,10 +50,10 @@ input[type='checkbox'] {
 
 .scrollbar-inverse::-webkit-scrollbar-thumb {
   border: none;
-  background: #2d3036;
+  background: #32323e;
 }
 
 .scrollbar-inverse::-webkit-scrollbar-thumb:hover {
   border: none;
-  background: #2d3036;
+  background: #32323e;
 }

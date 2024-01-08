@@ -1,10 +1,12 @@
 import type { ReactElement } from 'react';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import type { ITask } from '@/tasks/types';
 import { TaskStatusEnum } from '@/tasks/types';
 import { TaskContext } from '@/tasks/contexts/taskContext';
 import { InputText } from '@/common/inputText';
 import { BlockCheck } from '@/common/blockCheck';
+import { useOutsideClick } from '../../common/useOutsideClick';
+import { useHandleKeyboard } from '../../common/useHandleKeyboard';
 
 interface ITaskItemProps {
   task: ITask;
@@ -12,8 +14,13 @@ interface ITaskItemProps {
 
 export const TaskItem = ({ task }: ITaskItemProps): ReactElement => {
   const [name, setName] = useState<string>(task.description);
-
+  const [openMenu, setOpenMenu] = useState(false);
   const { handleUpdateTask, handleDropTask } = useContext(TaskContext);
+
+  const refOptions = useRef<HTMLDivElement>(null);
+  useOutsideClick(refOptions, () => {
+    setOpenMenu(false);
+  });
 
   useEffect(() => {
     if (task.description !== name) {
@@ -21,33 +28,70 @@ export const TaskItem = ({ task }: ITaskItemProps): ReactElement => {
     }
   }, [name]);
 
+  useHandleKeyboard((key) => {
+    if (key === 'Escape') {
+      setOpenMenu(false);
+    }
+  });
+
   return (
-    <tr className="group w-full py-[2px]">
-      <td className="py-[4px] px-[5px]  text-left">
+    <div className="group shadow-md flex items-center justify-center ">
+      <div className="min-w-[16px]" />
+      <div className="py-[1rem] text-left relative ">
+        <div
+          ref={refOptions}
+          className={`${
+            openMenu ? '' : 'hidden'
+          } fixed top-0 left-0 bottom-0 right-0 bg-background/40 backdrop-blur-sm transition-all duration-150`}
+        />
+        <div
+          className={`${
+            openMenu ? '' : 'hidden'
+          } bg-background border border-textColor/25 rounded-lg shadow-lg absolute left-[2rem] top-[2.5rem] min-w-[15rem] z-20`}>
+          <div className="min-h-[0.5rem]" />
+
+          <h3 className="text-base text-center text-textColor">Opções</h3>
+
+          <div className="pt-[0.5rem]" />
+
+          <button
+            type="button"
+            className="px-4 py-2 hover:bg-textColor/10 transition-all duration-150 w-full text-left"
+            onClick={(): void => {
+              handleDropTask(task.id);
+            }}>
+            Apagar
+          </button>
+
+          <div className="min-h-[0.5rem]" />
+        </div>
         <button
+          onClick={() => setOpenMenu((prev) => !prev)}
           type="button"
-          className="w-[35px] h-[20px] flex items-center justify-center"
-          onClick={(): void => {
-            handleDropTask(task.id);
-          }}>
-          <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="">
-            <path
-              d="M3.69687 0.483984L3.5 0.875H0.875C0.391016 0.875 0 1.26602 0 1.75C0 2.23398 0.391016 2.625 0.875 2.625H11.375C11.859 2.625 12.25 2.23398 12.25 1.75C12.25 1.26602 11.859 0.875 11.375 0.875H8.75L8.55312 0.483984C8.40547 0.185938 8.10195 0 7.77109 0H4.47891C4.14805 0 3.84453 0.185938 3.69687 0.483984ZM11.375 3.5H0.875L1.45469 12.7695C1.49844 13.4613 2.07266 14 2.76445 14H9.48555C10.1773 14 10.7516 13.4613 10.7953 12.7695L11.375 3.5Z"
-              fill="white"
-            />
-          </svg>
+          className=" flex items-center justify-center p-2 border border-transparent hover:border-textColor/20 hover:bg-textColor/10 rounded-full">
+          <div className="rounded-full transition-all duration-150">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="16"
+              width="4"
+              viewBox="0 0 128 512"
+              className="fill-textColor w-[16px] h-[16px]">
+              <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z" />
+            </svg>
+          </div>
         </button>
-      </td>
-      <td className="py-[4px] px-[5px] text-left w-full">
+      </div>
+
+      <div className="text-left w-full  overflow-hidden text-ellipsis">
         <InputText
           name="name"
           isRisked={task.status === TaskStatusEnum.completed}
           value={name}
           update={(value): void => setName(value)}
         />
-      </td>
+      </div>
 
-      <td className="py-[4px] px-[5px] pl-[16px] text-left">
+      <div className="text-left">
         <BlockCheck
           isChecked={task.status === TaskStatusEnum.completed}
           update={(newValue) => {
@@ -58,7 +102,7 @@ export const TaskItem = ({ task }: ITaskItemProps): ReactElement => {
             }
           }}
         />
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };
