@@ -28,7 +28,7 @@ jobs:
           version: ${{ matrix.pnpm-version }}
 
       - name: Install dependencies and test
-        run: pnpm i --frozen-lockfile
+        run: pnpm i
 
       - name: get current version
         id: get-version
