@@ -16,10 +16,6 @@ body {
   background-color: #32323e;
 }
 
-input[type='checkbox'] {
-  zoom: 1.6;
-}
-
 .scrollbar::-webkit-scrollbar {
   width: 15px;
 }
@@ -37,23 +33,4 @@ input[type='checkbox'] {
 .scrollbar::-webkit-scrollbar-thumb:hover {
   border: none;
   background: #1f2126;
-}
-
-.scrollbar-inverse::-webkit-scrollbar {
-  width: 5px;
-}
-
-.scrollbar-inverse::-webkit-scrollbar-track {
-  border: none;
-  background: #1f2126;
-}
-
-.scrollbar-inverse::-webkit-scrollbar-thumb {
-  border: none;
-  background: #32323e;
-}
-
-.scrollbar-inverse::-webkit-scrollbar-thumb:hover {
-  border: none;
-  background: #32323e;
 }

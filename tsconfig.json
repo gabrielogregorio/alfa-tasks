@@ -16,42 +16,17 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/base/*": ["src/components/base/*"],
-      "@/layouts/*": ["src/components/layouts/*"],
-      "@/templates/*": ["src/components/templates/*"],
-      "@/widgets/*": ["src/components/widgets/*"],
-      "@/screens/*": ["src/screens/*"],
       "@/tasks/*": ["src/tasks/*"],
-      "@/common/*": ["src/common/*"],
-
-      "@/mappers/*": ["src/core/mappers/*"],
-      "@/configs/*": ["src/core/configs/*"],
-      "@/connections/*": ["src/core/connections/*"],
-      "@/constants/*": ["src/core/constants/*"],
-      "@/contracts/*": ["src/core/contracts/*"],
-      "@/data/*": ["src/core/data/*"],
-      "@/errors/*": ["src/core/errors/*"],
-      "@/guard/*": ["src/core/guard/*"],
-      "@/hooks/*": ["src/core/hooks/*"],
-      "@/libs/*": ["src/core/libs/*"],
-      "@/locales/*": ["src/core/locales/*"],
-      "@/services/*": ["src/core/services/*"],
-      "@/utils/*": ["src/core/utils/*"],
-      "@/features/*": ["src/features/*"],
-
-      "@/core/*": ["src/core/*"],
-
-      "@/mocks/*": ["src/mocks/*"],
-      "@/pages/*": ["src/pages/*"]
+      "@/common/*": ["src/common/*"]
     },
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
-    "rootDir": "src",
+    "rootDir": "./",
     "outDir": "build"
   },
-  "include": ["next-env.d.ts", "./src/**/*.ts", "./src/**/*.tsx", "../vite.config.ts"],
+  "include": ["next-env.d.ts", "./src/**/*.ts", "./src/**/*.tsx", "./vite.config.ts"],
   "exclude": ["node_modules"]
 }

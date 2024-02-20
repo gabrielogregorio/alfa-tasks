@@ -4,5 +4,4 @@
 *.mdx
 node_modules
 build
-storybook-static
 *.snap

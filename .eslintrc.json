@@ -2,13 +2,9 @@
   "root": true,
   "env": {
     "browser": true,
-    "es2021": true,
-    "jest": true
+    "es2021": true
   },
-  "globals": {
-    "cy": true
-  },
-  "extends": ["plugin:react/recommended", "airbnb", "plugin:prettier/recommended", "plugin:storybook/recommended"],
+  "extends": ["plugin:react/recommended", "airbnb", "plugin:prettier/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json",
@@ -18,7 +14,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "spellcheck", "sonarjs", "import", "no-null", "canonical-vocabulary"],
+  "plugins": ["@typescript-eslint", "react", "spellcheck", "sonarjs", "import", "canonical-vocabulary"],
   "settings": {
     "import/resolver": {
       "typescript": {}
@@ -131,7 +127,6 @@
         "identifiers": true,
         "lang": "en_US",
         "skipWords": [
-          "youtube",
           "enum",
           "unlikes",
           "checkbox",
