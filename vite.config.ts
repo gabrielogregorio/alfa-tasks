@@ -6,6 +6,16 @@ import { envs } from './src/config/envs';
 
 const baseUrl = envs.VITE_BASE_URL || '/my-daily';
 
+const moveMetaCharsetToUp = () => {
+  return {
+    name: 'html-transform',
+    transformIndexHtml(html: string) {
+      const metaCharset = `<meta charset="UTF-8" />`;
+      return html.replace(/(<head>)/i, `$1${metaCharset}`);
+    },
+  };
+};
+
 export default defineConfig({
   root: '.',
   base: `${baseUrl}/`,
@@ -20,11 +30,12 @@ export default defineConfig({
     },
   },
   plugins: [
+    moveMetaCharsetToUp(),
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true,
+        enabled: false, // true,
       },
       base: `${baseUrl}/`,
       includeAssets: ['favicon.ico', 'icon.png', 'icon-512x512.png'],
