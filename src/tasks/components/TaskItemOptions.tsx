@@ -1,18 +1,18 @@
 import { ReactElement, useContext, useEffect, useState } from 'react';
 import { ITask } from '@/tasks/types';
-import { TaskContext } from '@/tasks/contexts/taskContext';
-import { InputText } from '@/common/inputText';
-import { BlockCheck } from '@/common/blockCheck';
-import { TrashIcon } from '@/common/icons';
+import { TaskContext } from '@/tasks/contexts/TaskContext';
+import { EditableTextInput } from '@/common/components/EditableTextInput';
+import { Checkbox } from '@/common/components/Checkbox';
+import { TaskDeleteButton } from '@/tasks/components/TaskDeleteButton';
 
-interface ITaskItemProps {
+interface ITaskItemOptionsProps {
   task: ITask;
 }
 
-export const TaskItem = ({ task }: ITaskItemProps): ReactElement => {
+export const TaskItemOptions = ({ task }: ITaskItemOptionsProps): ReactElement => {
   const [name, setName] = useState<string>(task.description);
 
-  const { handleUpdateTask, handleDropTask } = useContext(TaskContext);
+  const { handleUpdateTask } = useContext(TaskContext);
 
   useEffect(() => {
     if (task.description !== name) {
@@ -24,27 +24,19 @@ export const TaskItem = ({ task }: ITaskItemProps): ReactElement => {
     <div className="group shadow-md flex items-center justify-center ">
       <div className="min-w-[16px] !bg-blue-300" />
 
-      <button
-        onClick={() => handleDropTask(task.id)}
-        type="button"
-        aria-label="Deletar tarefa"
-        className=" min-h-[68px] flex items-center justify-center p-2 border border-transparent hover:border-textColor/20 hover:bg-textColor/10">
-        <div className="transition-all duration-150">
-          <TrashIcon />
-        </div>
-      </button>
+      <TaskDeleteButton task={task} />
 
       <div className="text-left w-full overflow-hidden text-ellipsis">
-        <InputText
+        <EditableTextInput
           name="name"
           isRisked={task.status === 'completed'}
           value={name}
-          update={(value): void => setName(value)}
+          update={(value: string): void => setName(value)}
         />
       </div>
 
       <div>
-        <BlockCheck
+        <Checkbox
           isChecked={task.status === 'completed'}
           update={(newValue) => {
             if (newValue) {

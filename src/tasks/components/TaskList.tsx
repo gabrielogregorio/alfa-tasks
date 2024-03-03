@@ -1,10 +1,10 @@
 import { ReactElement, useContext } from 'react';
-import { TaskItem } from '@/tasks/components/taskItem';
+import { TaskItemOptions } from '@/tasks/components/TaskItemOptions';
 import { ITask } from '@/tasks/types';
-import { TaskContext } from '@/tasks/contexts/taskContext';
-import { Button } from '../../common/button';
+import { TaskContext } from '@/tasks/contexts/TaskContext';
+import { Button } from '@/common/components/Button';
 
-export const Tasks = (): ReactElement => {
+export const TaskList = (): ReactElement => {
   const { tasks, handleAddNewTask } = useContext(TaskContext);
 
   return (
@@ -12,14 +12,14 @@ export const Tasks = (): ReactElement => {
       <div className="flex flex-col gap-[21px] mt-[6rem] max-w-[720px] w-full">
         <div className="flex flex-col gap-8">
           {tasks.map((task: ITask) => {
-            return <TaskItem key={task.id} task={task} />;
+            return <TaskItemOptions key={task.id} task={task} />;
           })}
         </div>
 
         <div className="flex items-center justify-start">
           <span className="font-semibold text-[1rem]" />
 
-          <Button onClick={(): void => handleAddNewTask()} className="w-full text-[2rem] mt-8" content="NEW TASK" />
+          <Button onClick={handleAddNewTask} className="w-full text-[2rem] mt-8" content="NEW TASK" />
         </div>
       </div>
     </div>

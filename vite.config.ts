@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
-import { envs } from './src/core/env';
+import { envs } from './src/config/envs';
 
 const baseUrl = envs.VITE_BASE_URL || '/my-daily';
 

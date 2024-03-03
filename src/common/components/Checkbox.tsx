@@ -6,7 +6,7 @@ type Props = {
   update: (value: boolean) => void;
 };
 
-export const BlockCheck = ({ isChecked, update }: Props): ReactElement => {
+export const Checkbox = ({ isChecked, update }: Props): ReactElement => {
   return (
     <button
       type="button"

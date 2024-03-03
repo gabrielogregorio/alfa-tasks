@@ -1,9 +1,10 @@
 import { v4 as uuidV4 } from 'uuid';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { taskStorageName } from '@/tasks/constants/storage';
 import { ITask } from '@/tasks/types';
-import { getCurrentDate } from '@/tasks/utils/utils';
-import { LocalStorageService } from '../../common/LocalStorageService';
+import { useDebounce } from '@/common/hooks/useDebounce';
+import { LocalStorageService } from '@/common/services/LocalStorageService';
+import { getCurrentDate } from '@/common/utils/getCurrentDate';
 
 const currentDate = getCurrentDate();
 
@@ -45,19 +46,11 @@ interface IUseHandleTasksResponse {
   tasks: ITask[];
 }
 
-const useEffectWithDebouncing = (callback: () => void, deps: unknown[], time: number) => {
-  useEffect(() => {
-    const timer = setTimeout(callback, time);
-
-    return () => clearTimeout(timer);
-  }, deps);
-};
-
 const TIME_IN_MS_TO_SAVE_TASKS = 500;
 export const useHandleTasks = (): IUseHandleTasksResponse => {
   const [tasks, setTasks] = useState<ITask[]>(resetTaskToNewDay());
 
-  useEffectWithDebouncing(() => saveTasks(tasks), [tasks], TIME_IN_MS_TO_SAVE_TASKS);
+  useDebounce(() => saveTasks(tasks), [tasks], TIME_IN_MS_TO_SAVE_TASKS);
 
   const handleAddNewTask = (): void => {
     setTasks((prev: ITask[]) => [...prev, buildNewTask()]);

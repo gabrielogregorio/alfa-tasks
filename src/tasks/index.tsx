@@ -1,6 +1,6 @@
-import { Tasks } from '@/tasks/components/tasks';
-import { Options } from '@/common/options';
-import { Title } from '@/common/title';
+import { TaskList } from '@/tasks/components/TaskList';
+import { Title } from '@/common/components/Title';
+import { TaskSettings } from '@/tasks/components/TaskSettings';
 
 export const TasksScreen = () => {
   return (
@@ -10,10 +10,10 @@ export const TasksScreen = () => {
       </header>
 
       <main>
-        <Tasks />
+        <TaskList />
       </main>
       <footer>
-        <Options />
+        <TaskSettings />
       </footer>
     </div>
   );
