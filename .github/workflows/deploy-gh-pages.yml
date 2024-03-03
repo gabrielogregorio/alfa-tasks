@@ -38,7 +38,7 @@ jobs:
 
       - name: build App
         run: |
-          echo "export const envs = { VITE_BASE_URL: '/my-daily', VITE_ENVIRONMENT: 'production', 'VERSION': '${{ steps.get-version.outputs.version }}' };" > src/core/env.ts
+          echo "export const envs = { VITE_BASE_URL: '/my-daily', VITE_ENVIRONMENT: 'production', 'VERSION': '${{ steps.get-version.outputs.version }}' };" > src/config/env.ts
           pnpm run build
 
       - name: Deploy with gh-pages

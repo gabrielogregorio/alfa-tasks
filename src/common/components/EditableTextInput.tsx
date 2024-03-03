@@ -1,10 +1,10 @@
 import { useRef, useEffect, useState } from 'react';
-import { Button } from './button';
-import { useOutsideClick } from './useOutsideClick';
-import { useHandleKeyboard } from './useHandleKeyboard';
+import { useOutsideClick } from '@/common/hooks/useOutsideClick';
+import { useHandleKeyboard } from '@/common/hooks/useHandleKeyboard';
+import { Button } from './Button';
 
-type inputMasks = 'default' | 'brl';
-interface IInputTextProps {
+type inputMasks = 'default';
+interface IEditableTextInputProps {
   name: string;
   value: string;
   update: (value: string) => void;
@@ -13,27 +13,14 @@ interface IInputTextProps {
   isDisabled?: boolean;
 }
 
-const CONVERT_TO_CENTS = 100;
-function toBrazilian(input: string): string {
-  const onlyDigits: string = input.replace(/\D/g, '');
-
-  const numberValue: number = parseInt(onlyDigits, 10) / CONVERT_TO_CENTS;
-
-  if (Number.isNaN(numberValue)) {
-    return 'R$ 0,00';
-  }
-
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(numberValue);
-}
-
-export const InputText = ({
+export const EditableTextInput = ({
   name,
   value,
   update,
   isRisked = false,
   mask = 'default',
   isDisabled = false,
-}: IInputTextProps) => {
+}: IEditableTextInputProps) => {
   const refElement = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isEditable, setIsEditable] = useState<boolean>(false);
@@ -89,7 +76,6 @@ export const InputText = ({
 
           const masks: { [key in inputMasks]: (content: string) => string } = {
             default: (text: string) => text,
-            brl: (text: string) => toBrazilian(text),
           };
 
           update(masks[mask](newText));

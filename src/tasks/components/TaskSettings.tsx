@@ -1,13 +1,14 @@
 import { ITask } from '@/tasks/types';
-import { getCurrentDate } from '@/tasks/utils/utils';
 import { useContext } from 'react';
-import { TaskContext } from '@/tasks/contexts/taskContext';
-import { useCopyToClipboard } from './useCopyToClipboard';
-import { useReadFromClipboard } from './useReadFromClipboard';
-import { Button } from './button';
-import { downloadFile } from './downloadFIle';
+import { TaskContext } from '@/tasks/contexts/TaskContext';
+import { useTextOnActionAndResetAfterDelay } from '@/common/hooks/useTextOnActionAndResetAfterDelay';
+import { downloadFile } from '@/common/utils/downloadFIle';
+import { useCopyToClipboard } from '@/common/hooks/useCopyToClipboard';
+import { useReadFromClipboard } from '@/common/hooks/useReadFromClipboard';
+import { Button } from '@/common/components/Button';
+import { getCurrentDate } from '@/common/utils/getCurrentDate';
 
-export const Options = () => {
+export const TaskSettings = () => {
   const { copy } = useCopyToClipboard();
   const { readClipboard } = useReadFromClipboard();
   const { tasks, handleAddBatchNewTasks } = useContext(TaskContext);
@@ -62,11 +63,23 @@ export const Options = () => {
     }
   };
 
+  const copyBackupData = useTextOnActionAndResetAfterDelay({
+    referenceText: 'COPIAR BACKUP',
+    alternativeText: 'COPIANDO...',
+  });
+
   return (
     <div className="w-full flex items-center justify-center mt-[10rem]">
       <div className='flex flex-col gap-8 max-w-[720px] w-full"'>
         <Button className="text-[2rem]" content="DOWNLOAD BACKUP" onClick={() => handleDownloadLocalStorage()} />
-        <Button className="text-[2rem]" content="COPIAR BACKUP" onClick={() => handleCopyToClipboard()} />
+        <Button
+          className="text-[2rem]"
+          content={copyBackupData.text}
+          onClick={() => {
+            copyBackupData.action();
+            handleCopyToClipboard();
+          }}
+        />
         <Button
           className="text-[2rem]"
           content="CARREGAR BACKUP"
