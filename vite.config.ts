@@ -8,7 +8,7 @@ const baseUrl = envs.VITE_BASE_URL || '/my-daily';
 
 export default defineConfig({
   root: '.',
-  base: baseUrl,
+  base: `${baseUrl}/`,
   build: {
     outDir: 'build',
     sourcemap: true,
@@ -26,7 +26,7 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      base: baseUrl,
+      base: `${baseUrl}/`,
       includeAssets: ['favicon.ico', 'icon.png', 'icon-512x512.png'],
       manifest: {
         name: 'my-daily',
@@ -39,7 +39,7 @@ export default defineConfig({
         start_url: `${baseUrl}/registerSW.js`,
         // start_url: '/?source=pwa',
 
-        scope: baseUrl, // baseUrl,
+        scope: `${baseUrl}/`, // baseUrl,
         display: 'standalone',
 
         icons: [
