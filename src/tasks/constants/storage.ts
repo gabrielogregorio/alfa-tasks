@@ -1,1 +1,1 @@
-export const taskStorageName: string = 'tasksV3';
+export const taskStorageName: string = 'gabrielogregorio-my-daily/tasks';
