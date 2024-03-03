@@ -36,10 +36,10 @@ export default defineConfig({
         background_color: '#32323e',
         orientation: 'portrait',
 
-        // start_url: `${baseUrl}/registerSW.js`,
-        start_url: '/?source=pwa',
+        start_url: `${baseUrl}/registerSW.js`,
+        // start_url: '/?source=pwa',
 
-        scope: '/', // baseUrl,
+        scope: baseUrl, // baseUrl,
         display: 'standalone',
 
         icons: [
