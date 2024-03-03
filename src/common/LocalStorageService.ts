@@ -1,6 +1,6 @@
-export class StorageService {
-  public static setItem(key: string, value: string): void {
-    localStorage.setItem(key, value);
+export class LocalStorageService {
+  public static setItem(key: string, value: unknown): void {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   public static getItem<T = string>(key: string): T | undefined {

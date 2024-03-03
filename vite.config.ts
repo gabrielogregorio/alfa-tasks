@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
 import { envs } from './src/core/env';
 
-const baseUrl = envs.VITE_BASE_URL || '/tasks';
+const baseUrl = envs.VITE_BASE_URL || '/my-day';
 
 export default defineConfig({
   root: '.',
@@ -26,34 +26,34 @@ export default defineConfig({
       base: baseUrl,
       includeAssets: ['favicon.ico', 'icon.png', 'icon-512x512.png'],
       manifest: {
-        name: 'tasks',
-        short_name: 'tasks',
-        description: 'my tasks',
+        name: 'my-day',
+        short_name: 'my-day',
+        description: 'my-day',
         theme_color: '#32323e',
         background_color: '#32323e',
         orientation: 'portrait',
-        start_url: baseUrl + '/registerSW.js',
+        start_url: `${baseUrl}/registerSW.js`,
         scope: baseUrl,
         display: 'standalone',
         icons: [
           {
-            src: baseUrl + '/icons/icon-192.png',
+            src: `${baseUrl}/icons/icon-192.png`,
             type: 'image/png',
             sizes: '192x192',
           },
           {
-            src: baseUrl + '/icons/icon-512.png',
+            src: `${baseUrl}/icons/icon-512.png`,
             type: 'image/png',
             sizes: '512x512',
           },
           {
-            src: baseUrl + '/icons/icon-maskable-192.png',
+            src: `${baseUrl}/icons/icon-maskable-192.png`,
             type: 'image/png',
             sizes: '192x192',
             purpose: 'maskable',
           },
           {
-            src: baseUrl + '/icons/icon-maskable-512.png',
+            src: `${baseUrl}/icons/icon-maskable-512.png`,
             type: 'image/png',
             sizes: '512x512',
             purpose: 'maskable',

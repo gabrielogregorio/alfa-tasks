@@ -1,1 +1,1 @@
-export const taskStorageName: string = 'tasksv2';
+export const taskStorageName: string = 'tasksV3';

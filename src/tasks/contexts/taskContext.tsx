@@ -1,7 +1,6 @@
 import { useHandleTasks } from '@/tasks/hooks/useHandleTasks';
-import type { ITask } from '@/tasks/types';
-import type { Context, ReactElement, ReactNode } from 'react';
-import { createContext, useMemo } from 'react';
+import { ITask } from '@/tasks/types';
+import { Context, ReactElement, ReactNode, createContext, useMemo } from 'react';
 
 interface ITaskContextType {
   handleDropTask: (taskId: string) => void;

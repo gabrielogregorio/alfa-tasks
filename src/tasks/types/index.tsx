@@ -1,24 +1,8 @@
-export enum TaskStatusEnum {
-  'available' = 'available',
-  'disabled' = 'disabled',
-  'completed' = 'completed',
-}
+type TaskStatusType = 'available' | 'disabled' | 'completed';
 
 export interface ITask {
   id: string;
   description: string;
-  status: TaskStatusEnum;
+  lastResetDate: string;
+  status: TaskStatusType;
 }
-
-export const tasksMock: ITask[] = [
-  {
-    id: '1',
-    description: 'Task 1',
-    status: TaskStatusEnum.available,
-  },
-  {
-    id: '2',
-    description: 'Task 2',
-    status: TaskStatusEnum.available,
-  },
-];

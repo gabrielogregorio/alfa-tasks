@@ -1,64 +1,89 @@
+import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { taskStorageName } from '@/tasks/constants/storage';
-import type { ITask } from '@/tasks/types';
-import { TaskStatusEnum } from '@/tasks/types';
-import { handleLoadNewDay } from '@/tasks/utils/handleLoadNeDay';
-import { StorageService } from '../../common/storageService';
+import { ITask } from '@/tasks/types';
+import { getCurrentDate } from '@/tasks/utils/utils';
+import { LocalStorageService } from '../../common/LocalStorageService';
+
+const currentDate = getCurrentDate();
+
+export const resetTaskToNewDay = (): ITask[] => {
+  const tasksDay: ITask[] = LocalStorageService.getItemAndParse<ITask[]>(taskStorageName) || [];
+
+  return tasksDay.map((task: ITask) => {
+    if (task.lastResetDate === currentDate) {
+      return task;
+    }
+
+    return { ...task, status: 'available', lastResetDate: currentDate };
+  });
+};
+
+const generateUniqueId = () => {
+  return uuidv4();
+};
+
+const saveTasks = (tasks: ITask[]) => {
+  LocalStorageService.setItem(taskStorageName, tasks);
+};
+
+const buildNewTask = (): ITask => {
+  return {
+    status: 'available',
+    lastResetDate: getCurrentDate(),
+    description: 'new task',
+    id: generateUniqueId(),
+  };
+};
 
 interface IUseHandleTasksResponse {
   handleDropTask: (taskId: string) => void;
   handleUpdateTask: (taskId: string, newStatus: Partial<ITask>) => void;
   handleAddBatchNewTasks: (tasks: ITask[]) => void;
+  handleResetToNewDay: () => void;
   handleAddNewTask: () => void;
   tasks: ITask[];
 }
 
-export const useHandleTasks = (): IUseHandleTasksResponse => {
-  const [tasks, setTasks] = useState<ITask[]>(handleLoadNewDay());
-
+const useEffectWithDebouncing = (callback: () => void, deps: unknown[], time: number) => {
   useEffect(() => {
-    StorageService.setItem(taskStorageName, JSON.stringify(tasks));
-  }, [tasks]);
+    const timer = setTimeout(callback, time);
+
+    return () => clearTimeout(timer);
+  }, deps);
+};
+
+const TIME_IN_MS_TO_SAVE_TASKS = 500;
+export const useHandleTasks = (): IUseHandleTasksResponse => {
+  const [tasks, setTasks] = useState<ITask[]>(resetTaskToNewDay());
+
+  useEffectWithDebouncing(() => saveTasks(tasks), [tasks], TIME_IN_MS_TO_SAVE_TASKS);
 
   const handleAddNewTask = (): void => {
-    setTasks((prev: ITask[]) => [
-      ...prev,
-      {
-        status: TaskStatusEnum.available,
-        description: 'Jogar 1 Comp Valorant',
-        id: new Date().getTime().toString(),
-      },
-    ]);
+    setTasks((prev: ITask[]) => [...prev, buildNewTask()]);
   };
 
-  const handleAddBatchNewTasks = (tasksLocal: ITask[]): void => {
-    setTasks((prev: ITask[]) => [...prev, ...tasksLocal]);
+  const handleAddBatchNewTasks = (tasksBatch: ITask[]): void => {
+    setTasks((prev: ITask[]) => [...prev, ...tasksBatch]);
   };
 
   const handleDropTask = (taskId: string): void => {
-    const tasksWithoutDropped: ITask[] = (JSON.parse(JSON.stringify(tasks)) as ITask[]).filter(
-      (task: ITask) => task.id !== taskId,
-    );
+    const tasksWithoutDropped = tasks.filter((task: ITask) => task.id !== taskId);
     setTasks(tasksWithoutDropped);
   };
 
   const handleUpdateTask = (taskId: string, newData: Partial<ITask>): void => {
-    const newTasks: ITask[] = JSON.parse(JSON.stringify(tasks)) as ITask[];
-    const tasksIdToUpdate: number = newTasks.findIndex((task: ITask) => task.id === taskId);
-
-    if (tasksIdToUpdate >= 0) {
-      newTasks[tasksIdToUpdate] = { ...newTasks[tasksIdToUpdate], ...newData };
-      setTasks(newTasks);
-    } else {
-      // eslint-disable-next-line no-console
-      console.error(`taskId '${taskId}' not found to update status to '${JSON.stringify(newData)}'`);
-    }
+    setTasks((prev) => prev.map((task) => (task.id === taskId ? { ...task, ...newData } : task)));
   };
 
+  const handleResetToNewDay = () => {
+    setTasks(resetTaskToNewDay());
+  };
   return {
     handleDropTask,
     handleUpdateTask,
     handleAddNewTask,
+    handleResetToNewDay,
     handleAddBatchNewTasks,
     tasks,
   };
