@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { taskStorageName } from '@/tasks/constants/storage';
 import { ITask } from '@/tasks/types';
@@ -20,7 +20,7 @@ export const resetTaskToNewDay = (): ITask[] => {
 };
 
 const generateUniqueId = () => {
-  return uuidv4();
+  return uuidV4();
 };
 
 const saveTasks = (tasks: ITask[]) => {
