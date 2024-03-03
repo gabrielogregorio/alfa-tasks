@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
 import { envs } from './src/core/env';
 
-const baseUrl = envs.VITE_BASE_URL || '/my-day';
+const baseUrl = envs.VITE_BASE_URL || '/my-daily';
 
 export default defineConfig({
   root: '.',
@@ -26,9 +26,9 @@ export default defineConfig({
       base: baseUrl,
       includeAssets: ['favicon.ico', 'icon.png', 'icon-512x512.png'],
       manifest: {
-        name: 'my-day',
-        short_name: 'my-day',
-        description: 'my-day',
+        name: 'my-daily',
+        short_name: 'my-daily',
+        description: 'my-daily',
         theme_color: '#32323e',
         background_color: '#32323e',
         orientation: 'portrait',

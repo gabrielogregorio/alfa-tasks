@@ -38,12 +38,12 @@ jobs:
 
       - name: build App
         run: |
-          echo "export const envs = { VITE_BASE_URL: '/my-day', VITE_ENVIRONMENT: 'production', 'VERSION': '${{ steps.get-version.outputs.version }}' };" > src/core/env.ts
+          echo "export const envs = { VITE_BASE_URL: '/my-daily', VITE_ENVIRONMENT: 'production', 'VERSION': '${{ steps.get-version.outputs.version }}' };" > src/core/env.ts
           pnpm run build
 
       - name: Deploy with gh-pages
         run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/gabrielogregorio/my-day.git
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/gabrielogregorio/my-daily.git
 
           echo "copy index to 404 page"
           cp build/index.html build/404.html

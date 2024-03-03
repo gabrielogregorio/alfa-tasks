@@ -1,7 +1,7 @@
 {
-  "name": "my-day",
+  "name": "my-daily",
   "version": "4.0.0",
-  "homepage": "https://gabrielogregorio.github.io/my-day",
+  "homepage": "https://gabrielogregorio.github.io/my-daily",
   "private": false,
   "main": "build/index.js",
   "engines": {
@@ -9,7 +9,7 @@
     "node": ">=16.x"
   },
   "scripts": {
-    "dev": "vite --host",
+    "dev": "yarn && vite --host",
     "check": "pnpm run prettier:format & pnpm run eslint:lint & pnpm run tsc:lint & pnpm run test:coverage",
     "tsc:lint": "tsc -p .",
     "eslint:lint": "eslint -c ./.eslintrc.json --ext '.tsx,.ts' 'src/**' --fix",
