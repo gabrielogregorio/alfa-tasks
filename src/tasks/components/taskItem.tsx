@@ -25,13 +25,9 @@ export const TaskItem = ({ task }: ITaskItemProps): ReactElement => {
       <div className="min-w-[16px] !bg-blue-300" />
 
       <button
-        onClick={() => {
-          const deleteTask = confirm('Delete this task');
-          if (deleteTask) {
-            handleDropTask(task.id);
-          }
-        }}
+        onClick={() => handleDropTask(task.id)}
         type="button"
+        aria-label="Deletar tarefa"
         className=" min-h-[68px] flex items-center justify-center p-2 border border-transparent hover:border-textColor/20 hover:bg-textColor/10">
         <div className="transition-all duration-150">
           <TrashIcon />

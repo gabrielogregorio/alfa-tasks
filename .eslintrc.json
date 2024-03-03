@@ -92,6 +92,7 @@
       }
     ],
     "no-console": "error",
+    "no-alert": "off",
     "no-delete-var": "error",
     "no-const-assign": "error",
     "no-unreachable": "error",
@@ -123,6 +124,7 @@
           "unlikes",
           "checkbox",
           "fieldset",
+          "debouncing",
           "readonly",
           "brl",
           "href",
