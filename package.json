@@ -1,6 +1,6 @@
 {
   "name": "my-daily",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "homepage": "https://gabrielogregorio.github.io/my-daily",
   "private": false,
   "main": "build/index.js",
