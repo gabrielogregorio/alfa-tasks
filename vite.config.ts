@@ -23,6 +23,9 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true,
+      },
       base: baseUrl,
       includeAssets: ['favicon.ico', 'icon.png', 'icon-512x512.png'],
       manifest: {
@@ -32,9 +35,13 @@ export default defineConfig({
         theme_color: '#32323e',
         background_color: '#32323e',
         orientation: 'portrait',
-        start_url: `${baseUrl}/registerSW.js`,
-        scope: baseUrl,
+
+        // start_url: `${baseUrl}/registerSW.js`,
+        start_url: '/?source=pwa',
+
+        scope: '/', // baseUrl,
         display: 'standalone',
+
         icons: [
           {
             src: `${baseUrl}/icons/icon-192.png`,
@@ -57,6 +64,12 @@ export default defineConfig({
             type: 'image/png',
             sizes: '512x512',
             purpose: 'maskable',
+          },
+          {
+            src: `${baseUrl}/icons/icon-144.png`,
+            type: 'image/png',
+            sizes: '144x144',
+            purpose: 'any',
           },
         ],
       },

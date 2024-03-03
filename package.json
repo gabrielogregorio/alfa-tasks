@@ -1,6 +1,6 @@
 {
   "name": "my-daily",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "homepage": "https://gabrielogregorio.github.io/my-daily",
   "private": false,
   "main": "build/index.js",
@@ -9,7 +9,7 @@
     "node": ">=18.x"
   },
   "scripts": {
-    "dev": "yarn && vite --host",
+    "dev": "pnpm i && vite --host",
     "lint": "eslint -c ./.eslintrc.json --ext '.tsx,.ts' 'src/**' --fix && tsc -p .",
     "format": "prettier *.{ts,js,md,tsx,jsx} --write",
     "build": "vite build",
