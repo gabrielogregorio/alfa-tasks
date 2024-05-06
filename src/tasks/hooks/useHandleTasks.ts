@@ -6,9 +6,17 @@ import { useDebounce } from '@/common/hooks/useDebounce';
 import { LocalStorageService } from '@/common/services/LocalStorageService';
 import { getCurrentDate } from '@/common/utils/getCurrentDate';
 
-const currentDate = getCurrentDate();
+export const isInNewDay = (): boolean => {
+  const currentDate = getCurrentDate();
+  const tasksDay: ITask[] = LocalStorageService.getItemAndParse<ITask[]>(taskStorageName) || [];
+
+  return tasksDay.some((task: ITask) => {
+    return task.lastResetDate !== currentDate;
+  });
+};
 
 export const resetTaskToNewDay = (): ITask[] => {
+  const currentDate = getCurrentDate();
   const tasksDay: ITask[] = LocalStorageService.getItemAndParse<ITask[]>(taskStorageName) || [];
 
   return tasksDay.map((task: ITask) => {
