@@ -39,7 +39,7 @@ sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 ```
 2. add this line
 ```bash
-@chromium-browser --kiosk --noerrdialogs --disable-infobars --incognito https://gabrielogregorio.github.io/my-daily
+@chromium-browser --start-fullscreen --noerrdialogs --disable-infobars --ap p=https://gabrielogregorio.github.io/my-daily
 ```
 
 3. Save, when you turn on this application it will automatically start in full screen.

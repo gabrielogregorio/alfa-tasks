@@ -13,7 +13,7 @@ module.exports = {
 
       colors: {
         textColor: '#dedee8',
-        background: '#32323e',
+        background: '#282a36',
       },
       animation: {
         fadeIn: 'fadeIn .3s ease-in-out',

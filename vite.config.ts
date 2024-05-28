@@ -43,8 +43,8 @@ export default defineConfig({
         name: 'my-daily',
         short_name: 'my-daily',
         description: 'my-daily',
-        theme_color: '#32323e',
-        background_color: '#32323e',
+        theme_color: '#282a36',
+        background_color: '#282a36',
         orientation: 'portrait',
 
         start_url: `${baseUrl}/registerSW.js`,

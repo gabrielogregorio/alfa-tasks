@@ -3,6 +3,7 @@ import { TaskSettings } from '@/tasks/components/TaskSettings';
 import { Button } from '@/common/components/Button';
 import { useResetOnNewDay } from '@/tasks/hooks/useResetOnNewDay';
 import { Counter } from '@/tasks/components/counter';
+import { CurrentDate } from '@/tasks/components/CurrentDate';
 
 export const TasksScreen = () => {
   useResetOnNewDay();
@@ -22,6 +23,8 @@ export const TasksScreen = () => {
       </header>
 
       <main>
+        <CurrentDate />
+
         <Counter />
 
         <TaskList />

@@ -9,6 +9,14 @@ type exampleType = {
 
 const timers: exampleType[] = [
   {
+    timer: 1000 * 60,
+    text: '1min',
+  },
+  {
+    timer: 1000 * 60 * 2,
+    text: '2min',
+  },
+  {
     timer: 1000 * 60 * 5,
     text: '5min',
   },

@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
   overflow-y: scroll;
   color: #fbfbfe;
-  background-color: #32323e;
+  background-color: #282a36;
   font-family: 'Cabin', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -28,7 +28,7 @@ body {
 
 .scrollbar::-webkit-scrollbar-track {
   border: none;
-  background: #32323e;
+  background: #282a36;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
