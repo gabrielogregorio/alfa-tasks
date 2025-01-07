@@ -56,7 +56,7 @@ export const Counter = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center flex-wrap">
         {timers.map((item) => {
           return (
             <Button

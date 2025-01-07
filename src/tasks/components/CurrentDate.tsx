@@ -30,7 +30,7 @@ export const CurrentDate = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <Button className="text-[6rem] mt-16" content={currentDate} onClick={() => {}} />
+      <Button className="text-[5rem] mt-16" content={currentDate} onClick={() => {}} />
     </div>
   );
 };
